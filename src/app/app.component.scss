@@ -1,0 +1,12 @@
+.content {
+  padding: 20px;
+  margin-top: 60px; // ナビゲーションバーの高さ分のマージン
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 15px;
+  }
+}

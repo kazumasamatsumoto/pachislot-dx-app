@@ -1,0 +1,41 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <button
+      class="hamburger"
+      (click)="toggleMenu()"
+      [class.active]="isMenuOpen"
+      aria-label="メニュー"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a routerLink="/" class="logo">パチスロDX</a>
+  </div>
+</nav>
+
+<!-- サイドメニュー -->
+<div
+  class="side-menu-overlay"
+  [class.active]="isMenuOpen"
+  (click)="toggleMenu()"
+></div>
+<div class="side-menu" [class.active]="isMenuOpen">
+  <ul>
+    <li>
+      <a routerLink="/page1" routerLinkActive="active" (click)="toggleMenu()"
+        >ページ1</a
+      >
+    </li>
+    <li>
+      <a routerLink="/page2" routerLinkActive="active" (click)="toggleMenu()"
+        >ページ2</a
+      >
+    </li>
+    <li>
+      <a routerLink="/page3" routerLinkActive="active" (click)="toggleMenu()"
+        >ページ3</a
+      >
+    </li>
+  </ul>
+</div>
