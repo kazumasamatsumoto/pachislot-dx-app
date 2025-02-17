@@ -1,1 +1,111 @@
-<p>page1 works!</p>
+<div class="counter-container">
+  <h1>カチカチ君</h1>
+
+  <div class="spins-counter">
+    <div class="spins-input">
+      <input
+        type="number"
+        [(ngModel)]="spinsInput"
+        placeholder="回転数を入力"
+        min="0"
+        (keyup.enter)="updateSpins()"
+      />
+      <button (click)="updateSpins()" class="spin-button">更新</button>
+    </div>
+    <div class="total-spins">総回転数: {{ totalSpins }}</div>
+  </div>
+
+  <div class="counter-grid">
+    <div class="counter-item bonus-item">
+      <button (click)="incrementGrape()" class="counter-button grape">
+        🍇 ブドウ
+      </button>
+      <div class="counter-value">{{ grapeCount }}</div>
+      <div class="probability">
+        <div>確率: {{ calculateProbabilityFraction(grapeCount) }}</div>
+        <div class="setting-range">{{ determineGrapeSettings() }}</div>
+      </div>
+    </div>
+
+    <div class="counter-item bonus-item">
+      <button (click)="incrementCherryBig()" class="counter-button cherry">
+        🍒 角チェリー+BIG
+      </button>
+      <div class="counter-value">{{ cherryBigCount }}</div>
+      <div class="probability">
+        <div>確率: {{ calculateProbabilityFraction(cherryBigCount) }}</div>
+        <div class="setting-range">{{ determineCherryBigSettings() }}</div>
+      </div>
+    </div>
+
+    <div class="counter-item bonus-item">
+      <button (click)="incrementCherryReg()" class="counter-button cherry">
+        🍒 角チェリー+REG
+      </button>
+      <div class="counter-value">{{ cherryRegCount }}</div>
+      <div class="probability">
+        <div>確率: {{ calculateProbabilityFraction(cherryRegCount) }}</div>
+        <div class="setting-range">{{ determineCherryRegSettings() }}</div>
+      </div>
+    </div>
+
+    <div class="counter-item bonus-item">
+      <button (click)="incrementCherryBonus()" class="counter-button cherry">
+        🍒 角チェリー+ボーナス
+      </button>
+      <div class="counter-value">{{ cherryBonusCount }}</div>
+      <div class="probability">
+        <div>確率: {{ calculateProbabilityFraction(cherryBonusCount) }}</div>
+        <div class="setting-range">{{ determineCherryBonusSettings() }}</div>
+      </div>
+    </div>
+
+    <div class="counter-item bonus-item">
+      <button (click)="incrementCherryNormal()" class="counter-button cherry">
+        🍒 非重複チェリー
+      </button>
+      <div class="counter-value">{{ cherryNormalCount }}</div>
+      <div class="probability">
+        <div>確率: {{ calculateProbabilityFraction(cherryNormalCount) }}</div>
+        <div class="setting-range">{{ determineCherryNormalSettings() }}</div>
+      </div>
+    </div>
+
+    <div class="counter-item bonus-item">
+      <button (click)="incrementBigBonus()" class="counter-button big-bonus">
+        💰 ビッグボーナス
+      </button>
+      <div class="counter-value">{{ bigBonusCount }}</div>
+      <div class="probability">
+        <div>確率: {{ calculateProbabilityFraction(bigBonusCount) }}</div>
+        <div class="setting-range">{{ determineBigBonusSettings() }}</div>
+      </div>
+    </div>
+
+    <div class="counter-item bonus-item">
+      <button
+        (click)="incrementRegularBonus()"
+        class="counter-button regular-bonus"
+      >
+        💎 レギュラーボーナス
+      </button>
+      <div class="counter-value">{{ regularBonusCount }}</div>
+      <div class="probability">
+        <div>確率: {{ calculateProbabilityFraction(regularBonusCount) }}</div>
+        <div class="setting-range">{{ determineRegularBonusSettings() }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="total-bonus-display">
+    <div class="total-probability">
+      合算確率:
+      {{ calculateProbabilityFraction(bigBonusCount + regularBonusCount) }}
+    </div>
+    <div class="total-setting-range">
+      {{ determineTotalBonusSettings() }}
+    </div>
+  </div>
+
+  <button (click)="resetCounters()" class="reset-button">リセット</button>
+</div>
