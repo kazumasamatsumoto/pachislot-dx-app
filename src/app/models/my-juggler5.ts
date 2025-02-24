@@ -1,7 +1,6 @@
 import {
   SlotMachineData,
   SlotSymbolProbabilities,
-  BonusProbabilities,
 } from './slot-probability.interface';
 
 export class MyJuggler5 implements SlotMachineData {
@@ -96,24 +95,27 @@ export class MyJuggler5 implements SlotMachineData {
         { setting: 6, probability: 1 / 1045.96 },
       ],
     },
+    {
+      symbolName: 'ビッグボーナス',
+      probabilities: [
+        { setting: 1, probability: 1 / 273.1 },
+        { setting: 2, probability: 1 / 270.8 },
+        { setting: 3, probability: 1 / 266.4 },
+        { setting: 4, probability: 1 / 254.0 },
+        { setting: 5, probability: 1 / 240.1 },
+        { setting: 6, probability: 1 / 229.1 },
+      ],
+    },
+    {
+      symbolName: 'レギュラーボーナス',
+      probabilities: [
+        { setting: 1, probability: 1 / 409.6 },
+        { setting: 2, probability: 1 / 385.5 },
+        { setting: 3, probability: 1 / 336.1 },
+        { setting: 4, probability: 1 / 290.0 },
+        { setting: 5, probability: 1 / 268.6 },
+        { setting: 6, probability: 1 / 229.1 },
+      ],
+    },
   ];
-
-  bonuses: BonusProbabilities = {
-    big: [
-      { setting: 1, probability: 1 / 273.1 },
-      { setting: 2, probability: 1 / 270.8 },
-      { setting: 3, probability: 1 / 266.4 },
-      { setting: 4, probability: 1 / 254.0 },
-      { setting: 5, probability: 1 / 240.1 },
-      { setting: 6, probability: 1 / 229.1 },
-    ],
-    reg: [
-      { setting: 1, probability: 1 / 409.6 },
-      { setting: 2, probability: 1 / 385.5 },
-      { setting: 3, probability: 1 / 336.1 },
-      { setting: 4, probability: 1 / 290.0 },
-      { setting: 5, probability: 1 / 268.6 },
-      { setting: 6, probability: 1 / 229.1 },
-    ],
-  };
 }

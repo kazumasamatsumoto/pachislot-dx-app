@@ -8,13 +8,7 @@ export interface SlotSymbolProbabilities {
   probabilities: SlotProbability[];
 }
 
-export interface BonusProbabilities {
-  big: SlotProbability[];
-  reg: SlotProbability[];
-}
-
 export interface SlotMachineData {
   machineName: string;
   symbols: SlotSymbolProbabilities[];
-  bonuses: BonusProbabilities;
 }

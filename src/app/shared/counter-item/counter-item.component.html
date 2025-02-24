@@ -1,0 +1,18 @@
+<div class="counter-item glass-effect-inner">
+  <div class="counter-header">
+    <div class="counter-icon">{{ icon }}</div>
+    <div class="counter-label">{{ label }}</div>
+  </div>
+  <div class="counter-content">
+    <div class="counter-input-group">
+      <button class="count-button" (click)="incrementCount()">+1</button>
+      <input
+        type="number"
+        [(ngModel)]="count"
+        min="0"
+        class="modern-input"
+        (change)="validateInput()"
+      />
+    </div>
+  </div>
+</div>

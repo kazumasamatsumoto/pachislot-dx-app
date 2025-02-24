@@ -4,6 +4,27 @@
   </div>
 
   <div class="main-container">
+    <!-- 機種選択エリア -->
+    <section class="machine-select glass-effect">
+      <h2 class="section-title">機種選択</h2>
+      <div class="machine-buttons">
+        <button
+          (click)="selectMachine('aim')"
+          class="netflix-button"
+          [class.active]="selectedMachine === 'aim'"
+        >
+          アイムジャグラー
+        </button>
+        <button
+          (click)="selectMachine('my')"
+          class="netflix-button"
+          [class.active]="selectedMachine === 'my'"
+        >
+          マイジャグラー
+        </button>
+      </div>
+    </section>
+
     <!-- 入力エリア -->
     <section class="input-section glass-effect">
       <h2 class="section-title">カウンター入力</h2>
@@ -23,167 +44,13 @@
       </div>
 
       <div class="counter-grid">
-        <div class="counter-item glass-effect-inner">
-          <div class="counter-header">
-            <div class="counter-icon">🍇</div>
-            <div class="counter-label">ブドウ</div>
-          </div>
-          <div class="counter-content">
-            <div class="counter-input-group">
-              <button class="count-button" (click)="incrementCount('grape')">
-                +1
-              </button>
-              <input
-                type="number"
-                [(ngModel)]="grapeCount"
-                min="0"
-                class="modern-input"
-                (change)="validateInput('grape')"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="counter-item glass-effect-inner">
-          <div class="counter-header">
-            <div class="counter-icon">🍒</div>
-            <div class="counter-label">角チェリー+BIG</div>
-          </div>
-          <div class="counter-content">
-            <div class="counter-input-group">
-              <button
-                class="count-button"
-                (click)="incrementCount('cherryBig')"
-              >
-                +1
-              </button>
-              <input
-                type="number"
-                [(ngModel)]="cherryBigCount"
-                min="0"
-                class="modern-input"
-                (change)="validateInput('cherryBig')"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="counter-item glass-effect-inner">
-          <div class="counter-header">
-            <div class="counter-icon">🍒</div>
-            <div class="counter-label">角チェリー+REG</div>
-          </div>
-          <div class="counter-content">
-            <div class="counter-input-group">
-              <button
-                class="count-button"
-                (click)="incrementCount('cherryReg')"
-              >
-                +1
-              </button>
-              <input
-                type="number"
-                [(ngModel)]="cherryRegCount"
-                min="0"
-                class="modern-input"
-                (change)="validateInput('cherryReg')"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="counter-item glass-effect-inner">
-          <div class="counter-header">
-            <div class="counter-icon">🍒</div>
-            <div class="counter-label">角チェリー+ボーナス</div>
-          </div>
-          <div class="counter-content">
-            <div class="counter-input-group">
-              <button
-                class="count-button"
-                (click)="incrementCount('cherryBonus')"
-              >
-                +1
-              </button>
-              <input
-                type="number"
-                [(ngModel)]="cherryBonusCount"
-                min="0"
-                class="modern-input"
-                (change)="validateInput('cherryBonus')"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="counter-item glass-effect-inner">
-          <div class="counter-header">
-            <div class="counter-icon">🍒</div>
-            <div class="counter-label">非重複チェリー</div>
-          </div>
-          <div class="counter-content">
-            <div class="counter-input-group">
-              <button
-                class="count-button"
-                (click)="incrementCount('cherryNormal')"
-              >
-                +1
-              </button>
-              <input
-                type="number"
-                [(ngModel)]="cherryNormalCount"
-                min="0"
-                class="modern-input"
-                (change)="validateInput('cherryNormal')"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="counter-item glass-effect-inner">
-          <div class="counter-header">
-            <div class="counter-icon">💰</div>
-            <div class="counter-label">ビッグボーナス</div>
-          </div>
-          <div class="counter-content">
-            <div class="counter-input-group">
-              <button class="count-button" (click)="incrementCount('bigBonus')">
-                +1
-              </button>
-              <input
-                type="number"
-                [(ngModel)]="bigBonusCount"
-                min="0"
-                class="modern-input"
-                (change)="validateInput('bigBonus')"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="counter-item glass-effect-inner">
-          <div class="counter-header">
-            <div class="counter-icon">💎</div>
-            <div class="counter-label">レギュラーボーナス</div>
-          </div>
-          <div class="counter-content">
-            <div class="counter-input-group">
-              <button
-                class="count-button"
-                (click)="incrementCount('regularBonus')"
-              >
-                +1
-              </button>
-              <input
-                type="number"
-                [(ngModel)]="regularBonusCount"
-                min="0"
-                class="modern-input"
-                (change)="validateInput('regularBonus')"
-              />
-            </div>
-          </div>
-        </div>
+        <app-counter-item
+          *ngFor="let symbol of slotData.symbols"
+          [icon]="getSymbolIcon(symbol.symbolName)"
+          [label]="symbol.symbolName"
+          [(count)]="counters[symbol.symbolName]"
+          [countKey]="getCountKey(symbol.symbolName)"
+        ></app-counter-item>
       </div>
     </section>
 
@@ -197,43 +64,34 @@
               <th>役名</th>
               <th>カウント</th>
               <th>確率</th>
+              <th>推測設定</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><span class="icon">🍇</span> ブドウ</td>
-              <td>{{ grapeCount }}</td>
-              <td>{{ calculateProbabilityFraction(grapeCount) }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">🍒</span> 角チェリー+BIG</td>
-              <td>{{ cherryBigCount }}</td>
-              <td>{{ calculateProbabilityFraction(cherryBigCount) }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">🍒</span> 角チェリー+REG</td>
-              <td>{{ cherryRegCount }}</td>
-              <td>{{ calculateProbabilityFraction(cherryRegCount) }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">🍒</span> 角チェリー+ボーナス</td>
-              <td>{{ cherryBonusCount }}</td>
-              <td>{{ calculateProbabilityFraction(cherryBonusCount) }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">🍒</span> 非重複チェリー</td>
-              <td>{{ cherryNormalCount }}</td>
-              <td>{{ calculateProbabilityFraction(cherryNormalCount) }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">💰</span> ビッグボーナス</td>
-              <td>{{ bigBonusCount }}</td>
-              <td>{{ calculateProbabilityFraction(bigBonusCount) }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">💎</span> レギュラーボーナス</td>
-              <td>{{ regularBonusCount }}</td>
-              <td>{{ calculateProbabilityFraction(regularBonusCount) }}</td>
+            <tr *ngFor="let symbol of slotData.symbols">
+              <td>
+                <span class="icon">{{ getSymbolIcon(symbol.symbolName) }}</span>
+                {{ symbol.symbolName }}
+              </td>
+              <td>{{ counters[symbol.symbolName] }}</td>
+              <td>
+                {{ calculateProbabilityFraction(counters[symbol.symbolName]) }}
+              </td>
+              <td
+                [ngClass]="
+                  getProbabilityClass(
+                    symbol.symbolName,
+                    counters[symbol.symbolName]
+                  )
+                "
+              >
+                {{
+                  estimateSetting(
+                    symbol.symbolName,
+                    counters[symbol.symbolName]
+                  )
+                }}
+              </td>
             </tr>
           </tbody>
         </table>

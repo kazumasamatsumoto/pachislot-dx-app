@@ -242,6 +242,18 @@ h1 {
 
   td {
     font-size: 1rem;
+
+    &.low-setting {
+      color: #ff4d4d;
+    }
+
+    &.mid-setting {
+      color: #ffb84d;
+    }
+
+    &.high-setting {
+      color: #4dff4d;
+    }
   }
 
   tbody tr {
@@ -314,6 +326,56 @@ h1 {
     td {
       padding: 0.6rem;
       font-size: 0.8rem;
+    }
+  }
+}
+
+.machine-select {
+  margin-bottom: 20px;
+  padding: 20px;
+
+  .machine-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
+
+    button {
+      min-width: 150px;
+      position: relative;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(229, 9, 20, 0.3);
+        border-color: rgba(229, 9, 20, 0.5);
+        transform: translateY(-2px);
+      }
+
+      &.active {
+        background-color: #e50914;
+        border-color: #e50914;
+        box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+        transform: translateY(-2px);
+
+        &:after {
+          content: "";
+          position: absolute;
+          bottom: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 8px;
+          height: 8px;
+          background-color: #e50914;
+          border-radius: 50%;
+        }
+
+        &:hover {
+          background-color: #f40612;
+          border-color: #f40612;
+        }
+      }
     }
   }
 }
