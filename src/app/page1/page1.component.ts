@@ -163,54 +163,57 @@ export class Page1Component implements OnInit {
   }
 
   // カウントアップメソッド
-  incrementGrape() {
-    console.log('ブドウカウントアップ前:', this.grapeCount);
-    this.grapeCount++;
-    console.log('ブドウカウントアップ後:', this.grapeCount);
-    this.saveCounters();
+  incrementCount(type: string): void {
+    switch (type) {
+      case 'grape':
+        this.grapeCount++;
+        break;
+      case 'cherryBig':
+        this.cherryBigCount++;
+        break;
+      case 'cherryReg':
+        this.cherryRegCount++;
+        break;
+      case 'cherryBonus':
+        this.cherryBonusCount++;
+        break;
+      case 'cherryNormal':
+        this.cherryNormalCount++;
+        break;
+      case 'bigBonus':
+        this.bigBonusCount++;
+        break;
+      case 'regularBonus':
+        this.regularBonusCount++;
+        break;
+    }
   }
 
-  // チェリー関連のカウントアップメソッド
-  incrementCherryBig() {
-    console.log('角チェリー+BIGカウントアップ前:', this.cherryBigCount);
-    this.cherryBigCount++;
-    console.log('角チェリー+BIGカウントアップ後:', this.cherryBigCount);
-    this.saveCounters();
-  }
-
-  incrementCherryReg() {
-    console.log('角チェリー+REGカウントアップ前:', this.cherryRegCount);
-    this.cherryRegCount++;
-    console.log('角チェリー+REGカウントアップ後:', this.cherryRegCount);
-    this.saveCounters();
-  }
-
-  incrementCherryBonus() {
-    console.log('角チェリー+ボーナスカウントアップ前:', this.cherryBonusCount);
-    this.cherryBonusCount++;
-    console.log('角チェリー+ボーナスカウントアップ後:', this.cherryBonusCount);
-    this.saveCounters();
-  }
-
-  incrementCherryNormal() {
-    console.log('非重複チェリーカウントアップ前:', this.cherryNormalCount);
-    this.cherryNormalCount++;
-    console.log('非重複チェリーカウントアップ後:', this.cherryNormalCount);
-    this.saveCounters();
-  }
-
-  incrementBigBonus() {
-    console.log('ビッグボーナスカウントアップ前:', this.bigBonusCount);
-    this.bigBonusCount++;
-    console.log('ビッグボーナスカウントアップ後:', this.bigBonusCount);
-    this.saveCounters();
-  }
-
-  incrementRegularBonus() {
-    console.log('レギュラーボーナスカウントアップ前:', this.regularBonusCount);
-    this.regularBonusCount++;
-    console.log('レギュラーボーナスカウントアップ後:', this.regularBonusCount);
-    this.saveCounters();
+  // 入力検証メソッド
+  validateInput(type: string): void {
+    switch (type) {
+      case 'grape':
+        this.grapeCount = Math.max(0, this.grapeCount || 0);
+        break;
+      case 'cherryBig':
+        this.cherryBigCount = Math.max(0, this.cherryBigCount || 0);
+        break;
+      case 'cherryReg':
+        this.cherryRegCount = Math.max(0, this.cherryRegCount || 0);
+        break;
+      case 'cherryBonus':
+        this.cherryBonusCount = Math.max(0, this.cherryBonusCount || 0);
+        break;
+      case 'cherryNormal':
+        this.cherryNormalCount = Math.max(0, this.cherryNormalCount || 0);
+        break;
+      case 'bigBonus':
+        this.bigBonusCount = Math.max(0, this.bigBonusCount || 0);
+        break;
+      case 'regularBonus':
+        this.regularBonusCount = Math.max(0, this.regularBonusCount || 0);
+        break;
+    }
   }
 
   // 確率計算メソッド

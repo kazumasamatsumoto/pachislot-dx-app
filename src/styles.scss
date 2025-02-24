@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { 
+  height: 100%; 
+  background-color: #141414;
+  color: #ffffff;
+}
+
+body { 
+  margin: 0; 
+  font-family: 'Netflix Sans', Roboto, "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Netflix-like smooth transitions */
+.mat-card {
+  transition: all 0.3s ease-in-out;
+  background-color: #2f2f2f !important;
+  color: #ffffff !important;
+}
+
+.mat-card-title {
+  color: #ffffff !important;
+}
+
+.mat-card-content {
+  color: #d2d2d2 !important;
+}
