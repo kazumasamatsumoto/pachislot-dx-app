@@ -240,55 +240,6 @@
       </div>
     </section>
 
-    <!-- 設定推測エリア -->
-    <section class="prediction-section glass-effect">
-      <h2 class="section-title">設定推測結果</h2>
-      <div class="table-container">
-        <table class="netflix-table">
-          <thead>
-            <tr>
-              <th>役名</th>
-              <th>推測設定</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="icon">🍇</span> ブドウ</td>
-              <td>{{ determineGrapeSettings() }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">🍒</span> 角チェリー+BIG</td>
-              <td>{{ determineCherryBigSettings() }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">🍒</span> 角チェリー+REG</td>
-              <td>{{ determineCherryRegSettings() }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">🍒</span> 角チェリー+ボーナス</td>
-              <td>{{ determineCherryBonusSettings() }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">🍒</span> 非重複チェリー</td>
-              <td>{{ determineCherryNormalSettings() }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">💰</span> ビッグボーナス</td>
-              <td>{{ determineBigBonusSettings() }}</td>
-            </tr>
-            <tr>
-              <td><span class="icon">💎</span> レギュラーボーナス</td>
-              <td>{{ determineRegularBonusSettings() }}</td>
-            </tr>
-            <tr class="total-row">
-              <td>合算</td>
-              <td>{{ determineTotalBonusSettings() }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
     <button (click)="resetCounters()" class="netflix-button reset-button">
       リセット
     </button>
