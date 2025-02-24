@@ -4,236 +4,290 @@
   </div>
 
   <div class="main-container">
-    <div class="spins-counter glass-effect">
-      <div class="spins-input">
-        <input
-          type="number"
-          [(ngModel)]="spinsInput"
-          placeholder="回転数を入力"
-          min="0"
-          (keyup.enter)="updateSpins()"
-          class="modern-input"
-        />
-        <button (click)="updateSpins()" class="netflix-button">更新</button>
-      </div>
-      <div class="total-spins">総回転数: {{ totalSpins }}</div>
-    </div>
-
-    <div class="counter-grid">
-      <div class="counter-item glass-effect">
-        <div class="counter-header">
-          <div class="counter-icon">🍇</div>
-          <div class="counter-label">ブドウ</div>
+    <!-- 入力エリア -->
+    <section class="input-section glass-effect">
+      <h2 class="section-title">カウンター入力</h2>
+      <div class="spins-counter">
+        <div class="spins-input">
+          <input
+            type="number"
+            [(ngModel)]="spinsInput"
+            placeholder="回転数を入力"
+            min="0"
+            (keyup.enter)="updateSpins()"
+            class="modern-input"
+          />
+          <button (click)="updateSpins()" class="netflix-button">更新</button>
         </div>
-        <div class="counter-content">
-          <div class="counter-input-group">
-            <button class="count-button" (click)="incrementCount('grape')">
-              +1
-            </button>
-            <input
-              type="number"
-              [(ngModel)]="grapeCount"
-              min="0"
-              class="modern-input"
-              (change)="validateInput('grape')"
-            />
-          </div>
-          <div class="probability">
-            <div class="probability-value">
-              確率: {{ calculateProbabilityFraction(grapeCount) }}
-            </div>
-            <div class="setting-range">{{ determineGrapeSettings() }}</div>
-          </div>
-        </div>
+        <div class="total-spins">総回転数: {{ totalSpins }}</div>
       </div>
 
-      <div class="counter-item glass-effect">
-        <div class="counter-header">
-          <div class="counter-icon">🍒</div>
-          <div class="counter-label">角チェリー+BIG</div>
-        </div>
-        <div class="counter-content">
-          <div class="counter-input-group">
-            <button class="count-button" (click)="incrementCount('cherryBig')">
-              +1
-            </button>
-            <input
-              type="number"
-              [(ngModel)]="cherryBigCount"
-              min="0"
-              class="modern-input"
-              (change)="validateInput('cherryBig')"
-            />
+      <div class="counter-grid">
+        <div class="counter-item glass-effect-inner">
+          <div class="counter-header">
+            <div class="counter-icon">🍇</div>
+            <div class="counter-label">ブドウ</div>
           </div>
-          <div class="probability">
-            <div class="probability-value">
-              確率: {{ calculateProbabilityFraction(cherryBigCount) }}
+          <div class="counter-content">
+            <div class="counter-input-group">
+              <button class="count-button" (click)="incrementCount('grape')">
+                +1
+              </button>
+              <input
+                type="number"
+                [(ngModel)]="grapeCount"
+                min="0"
+                class="modern-input"
+                (change)="validateInput('grape')"
+              />
             </div>
-            <div class="setting-range">{{ determineCherryBigSettings() }}</div>
           </div>
         </div>
-      </div>
 
-      <div class="counter-item glass-effect">
-        <div class="counter-header">
-          <div class="counter-icon">🍒</div>
-          <div class="counter-label">角チェリー+REG</div>
-        </div>
-        <div class="counter-content">
-          <div class="counter-input-group">
-            <button class="count-button" (click)="incrementCount('cherryReg')">
-              +1
-            </button>
-            <input
-              type="number"
-              [(ngModel)]="cherryRegCount"
-              min="0"
-              class="modern-input"
-              (change)="validateInput('cherryReg')"
-            />
+        <div class="counter-item glass-effect-inner">
+          <div class="counter-header">
+            <div class="counter-icon">🍒</div>
+            <div class="counter-label">角チェリー+BIG</div>
           </div>
-          <div class="probability">
-            <div class="probability-value">
-              確率: {{ calculateProbabilityFraction(cherryRegCount) }}
+          <div class="counter-content">
+            <div class="counter-input-group">
+              <button
+                class="count-button"
+                (click)="incrementCount('cherryBig')"
+              >
+                +1
+              </button>
+              <input
+                type="number"
+                [(ngModel)]="cherryBigCount"
+                min="0"
+                class="modern-input"
+                (change)="validateInput('cherryBig')"
+              />
             </div>
-            <div class="setting-range">{{ determineCherryRegSettings() }}</div>
           </div>
         </div>
-      </div>
 
-      <div class="counter-item glass-effect">
-        <div class="counter-header">
-          <div class="counter-icon">🍒</div>
-          <div class="counter-label">角チェリー+ボーナス</div>
-        </div>
-        <div class="counter-content">
-          <div class="counter-input-group">
-            <button
-              class="count-button"
-              (click)="incrementCount('cherryBonus')"
-            >
-              +1
-            </button>
-            <input
-              type="number"
-              [(ngModel)]="cherryBonusCount"
-              min="0"
-              class="modern-input"
-              (change)="validateInput('cherryBonus')"
-            />
+        <div class="counter-item glass-effect-inner">
+          <div class="counter-header">
+            <div class="counter-icon">🍒</div>
+            <div class="counter-label">角チェリー+REG</div>
           </div>
-          <div class="probability">
-            <div class="probability-value">
-              確率: {{ calculateProbabilityFraction(cherryBonusCount) }}
-            </div>
-            <div class="setting-range">
-              {{ determineCherryBonusSettings() }}
+          <div class="counter-content">
+            <div class="counter-input-group">
+              <button
+                class="count-button"
+                (click)="incrementCount('cherryReg')"
+              >
+                +1
+              </button>
+              <input
+                type="number"
+                [(ngModel)]="cherryRegCount"
+                min="0"
+                class="modern-input"
+                (change)="validateInput('cherryReg')"
+              />
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="counter-item glass-effect">
-        <div class="counter-header">
-          <div class="counter-icon">🍒</div>
-          <div class="counter-label">非重複チェリー</div>
-        </div>
-        <div class="counter-content">
-          <div class="counter-input-group">
-            <button
-              class="count-button"
-              (click)="incrementCount('cherryNormal')"
-            >
-              +1
-            </button>
-            <input
-              type="number"
-              [(ngModel)]="cherryNormalCount"
-              min="0"
-              class="modern-input"
-              (change)="validateInput('cherryNormal')"
-            />
+        <div class="counter-item glass-effect-inner">
+          <div class="counter-header">
+            <div class="counter-icon">🍒</div>
+            <div class="counter-label">角チェリー+ボーナス</div>
           </div>
-          <div class="probability">
-            <div class="probability-value">
-              確率: {{ calculateProbabilityFraction(cherryNormalCount) }}
-            </div>
-            <div class="setting-range">
-              {{ determineCherryNormalSettings() }}
+          <div class="counter-content">
+            <div class="counter-input-group">
+              <button
+                class="count-button"
+                (click)="incrementCount('cherryBonus')"
+              >
+                +1
+              </button>
+              <input
+                type="number"
+                [(ngModel)]="cherryBonusCount"
+                min="0"
+                class="modern-input"
+                (change)="validateInput('cherryBonus')"
+              />
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="counter-item glass-effect">
-        <div class="counter-header">
-          <div class="counter-icon">💰</div>
-          <div class="counter-label">ビッグボーナス</div>
-        </div>
-        <div class="counter-content">
-          <div class="counter-input-group">
-            <button class="count-button" (click)="incrementCount('bigBonus')">
-              +1
-            </button>
-            <input
-              type="number"
-              [(ngModel)]="bigBonusCount"
-              min="0"
-              class="modern-input"
-              (change)="validateInput('bigBonus')"
-            />
+        <div class="counter-item glass-effect-inner">
+          <div class="counter-header">
+            <div class="counter-icon">🍒</div>
+            <div class="counter-label">非重複チェリー</div>
           </div>
-          <div class="probability">
-            <div class="probability-value">
-              確率: {{ calculateProbabilityFraction(bigBonusCount) }}
+          <div class="counter-content">
+            <div class="counter-input-group">
+              <button
+                class="count-button"
+                (click)="incrementCount('cherryNormal')"
+              >
+                +1
+              </button>
+              <input
+                type="number"
+                [(ngModel)]="cherryNormalCount"
+                min="0"
+                class="modern-input"
+                (change)="validateInput('cherryNormal')"
+              />
             </div>
-            <div class="setting-range">{{ determineBigBonusSettings() }}</div>
           </div>
         </div>
-      </div>
 
-      <div class="counter-item glass-effect">
-        <div class="counter-header">
-          <div class="counter-icon">💎</div>
-          <div class="counter-label">レギュラーボーナス</div>
-        </div>
-        <div class="counter-content">
-          <div class="counter-input-group">
-            <button
-              class="count-button"
-              (click)="incrementCount('regularBonus')"
-            >
-              +1
-            </button>
-            <input
-              type="number"
-              [(ngModel)]="regularBonusCount"
-              min="0"
-              class="modern-input"
-              (change)="validateInput('regularBonus')"
-            />
+        <div class="counter-item glass-effect-inner">
+          <div class="counter-header">
+            <div class="counter-icon">💰</div>
+            <div class="counter-label">ビッグボーナス</div>
           </div>
-          <div class="probability">
-            <div class="probability-value">
-              確率: {{ calculateProbabilityFraction(regularBonusCount) }}
-            </div>
-            <div class="setting-range">
-              {{ determineRegularBonusSettings() }}
+          <div class="counter-content">
+            <div class="counter-input-group">
+              <button class="count-button" (click)="incrementCount('bigBonus')">
+                +1
+              </button>
+              <input
+                type="number"
+                [(ngModel)]="bigBonusCount"
+                min="0"
+                class="modern-input"
+                (change)="validateInput('bigBonus')"
+              />
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="total-bonus-display glass-effect">
-      <div class="total-probability">
-        合算確率:
-        {{ calculateProbabilityFraction(bigBonusCount + regularBonusCount) }}
+        <div class="counter-item glass-effect-inner">
+          <div class="counter-header">
+            <div class="counter-icon">💎</div>
+            <div class="counter-label">レギュラーボーナス</div>
+          </div>
+          <div class="counter-content">
+            <div class="counter-input-group">
+              <button
+                class="count-button"
+                (click)="incrementCount('regularBonus')"
+              >
+                +1
+              </button>
+              <input
+                type="number"
+                [(ngModel)]="regularBonusCount"
+                min="0"
+                class="modern-input"
+                (change)="validateInput('regularBonus')"
+              />
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="total-setting-range">
-        {{ determineTotalBonusSettings() }}
+    </section>
+
+    <!-- 計算エリア -->
+    <section class="calculation-section glass-effect">
+      <h2 class="section-title">確率計算結果</h2>
+      <div class="table-container">
+        <table class="netflix-table">
+          <thead>
+            <tr>
+              <th>役名</th>
+              <th>カウント</th>
+              <th>確率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="icon">🍇</span> ブドウ</td>
+              <td>{{ grapeCount }}</td>
+              <td>{{ calculateProbabilityFraction(grapeCount) }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">🍒</span> 角チェリー+BIG</td>
+              <td>{{ cherryBigCount }}</td>
+              <td>{{ calculateProbabilityFraction(cherryBigCount) }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">🍒</span> 角チェリー+REG</td>
+              <td>{{ cherryRegCount }}</td>
+              <td>{{ calculateProbabilityFraction(cherryRegCount) }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">🍒</span> 角チェリー+ボーナス</td>
+              <td>{{ cherryBonusCount }}</td>
+              <td>{{ calculateProbabilityFraction(cherryBonusCount) }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">🍒</span> 非重複チェリー</td>
+              <td>{{ cherryNormalCount }}</td>
+              <td>{{ calculateProbabilityFraction(cherryNormalCount) }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">💰</span> ビッグボーナス</td>
+              <td>{{ bigBonusCount }}</td>
+              <td>{{ calculateProbabilityFraction(bigBonusCount) }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">💎</span> レギュラーボーナス</td>
+              <td>{{ regularBonusCount }}</td>
+              <td>{{ calculateProbabilityFraction(regularBonusCount) }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </div>
+    </section>
+
+    <!-- 設定推測エリア -->
+    <section class="prediction-section glass-effect">
+      <h2 class="section-title">設定推測結果</h2>
+      <div class="table-container">
+        <table class="netflix-table">
+          <thead>
+            <tr>
+              <th>役名</th>
+              <th>推測設定</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="icon">🍇</span> ブドウ</td>
+              <td>{{ determineGrapeSettings() }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">🍒</span> 角チェリー+BIG</td>
+              <td>{{ determineCherryBigSettings() }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">🍒</span> 角チェリー+REG</td>
+              <td>{{ determineCherryRegSettings() }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">🍒</span> 角チェリー+ボーナス</td>
+              <td>{{ determineCherryBonusSettings() }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">🍒</span> 非重複チェリー</td>
+              <td>{{ determineCherryNormalSettings() }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">💰</span> ビッグボーナス</td>
+              <td>{{ determineBigBonusSettings() }}</td>
+            </tr>
+            <tr>
+              <td><span class="icon">💎</span> レギュラーボーナス</td>
+              <td>{{ determineRegularBonusSettings() }}</td>
+            </tr>
+            <tr class="total-row">
+              <td>合算</td>
+              <td>{{ determineTotalBonusSettings() }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
     <button (click)="resetCounters()" class="netflix-button reset-button">
       リセット

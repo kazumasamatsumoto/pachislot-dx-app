@@ -188,3 +188,132 @@ h1 {
     background: #e50914;
   }
 }
+
+// セクションスタイル
+.section-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #e50914;
+  text-align: center;
+}
+
+.input-section,
+.calculation-section,
+.prediction-section {
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.glass-effect-inner {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  border-radius: 12px;
+  padding: 1.2rem;
+}
+
+// テーブルスタイル
+.table-container {
+  overflow-x: auto;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+.netflix-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 1rem;
+
+  th,
+  td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  th {
+    font-weight: bold;
+    color: #e50914;
+    font-size: 1.1rem;
+    background: rgba(229, 9, 20, 0.1);
+  }
+
+  td {
+    font-size: 1rem;
+  }
+
+  tbody tr {
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  .icon {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+  }
+
+  .total-row {
+    font-weight: bold;
+    background: rgba(229, 9, 20, 0.1);
+
+    td {
+      color: #e50914;
+    }
+
+    &:hover {
+      background: rgba(229, 9, 20, 0.15);
+    }
+  }
+}
+
+// レスポンシブ対応
+@media (max-width: $breakpoint-tablet) {
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .input-section,
+  .calculation-section,
+  .prediction-section {
+    padding: 1.5rem;
+  }
+
+  .netflix-table {
+    th,
+    td {
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .icon {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .section-title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .input-section,
+  .calculation-section,
+  .prediction-section {
+    padding: 1rem;
+  }
+
+  .netflix-table {
+    th,
+    td {
+      padding: 0.6rem;
+      font-size: 0.8rem;
+    }
+  }
+}
