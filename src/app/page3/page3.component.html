@@ -1,1 +1,117 @@
-<p>page3 works!</p>
+<div class="account-container">
+  <div class="loading-spinner" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>読み込み中...</p>
+  </div>
+
+  <div class="error-message" *ngIf="error">
+    <p>{{ error }}</p>
+    <button (click)="error = ''">閉じる</button>
+  </div>
+
+  <!-- 未ログイン状態 -->
+  <div class="login-container" *ngIf="!user">
+    <h2>アカウント管理</h2>
+    <p>チーム管理機能を利用するにはログインしてください。</p>
+    <button class="login-button" (click)="login()">
+      <img src="assets/google-icon.svg" alt="Google" />
+      Googleでログイン
+    </button>
+  </div>
+
+  <!-- ログイン済み状態 -->
+  <div class="account-dashboard" *ngIf="user">
+    <div class="user-profile">
+      <img [src]="user.photoURL" alt="プロフィール画像" *ngIf="user.photoURL" />
+      <div class="user-info">
+        <h2>{{ user.displayName }}</h2>
+        <p>{{ user.email }}</p>
+        <button class="logout-button" (click)="logout()">ログアウト</button>
+      </div>
+    </div>
+
+    <div class="team-management">
+      <div class="team-list">
+        <h3>所属チーム</h3>
+        <ul>
+          <li
+            *ngFor="let team of teams"
+            [class.active]="currentTeam?.id === team.id"
+            (click)="selectTeam(team)"
+          >
+            {{ team.name }}
+            <span class="role-badge" *ngIf="team.leaderId === user.uid"
+              >リーダー</span
+            >
+            <span class="role-badge member" *ngIf="team.leaderId !== user.uid"
+              >メンバー</span
+            >
+          </li>
+        </ul>
+
+        <div class="create-team">
+          <h4>新しいチームを作成</h4>
+          <div class="team-form">
+            <input
+              type="text"
+              [(ngModel)]="newTeamName"
+              placeholder="チーム名"
+            />
+            <button (click)="createTeam()" [disabled]="!newTeamName.trim()">
+              作成
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-details" *ngIf="currentTeam">
+        <h3>{{ currentTeam.name }}</h3>
+
+        <div class="team-members">
+          <h4>メンバー一覧</h4>
+          <ul>
+            <li *ngFor="let member of currentTeam.members">
+              <div class="member-info">
+                <img
+                  [src]="member.photoURL"
+                  alt="メンバー画像"
+                  *ngIf="member.photoURL"
+                />
+                <div>
+                  <p class="member-name">{{ member.displayName }}</p>
+                  <p class="member-email">{{ member.email }}</p>
+                </div>
+                <span
+                  class="role-badge"
+                  *ngIf="member.uid === currentTeam.leaderId"
+                  >リーダー</span
+                >
+              </div>
+              <button
+                *ngIf="isTeamLeader() && member.uid !== user.uid"
+                class="remove-button"
+                (click)="removeMember(member.uid)"
+              >
+                削除
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="invite-member" *ngIf="isTeamLeader()">
+          <h4>メンバーを招待</h4>
+          <div class="invite-form">
+            <input
+              type="email"
+              [(ngModel)]="inviteEmail"
+              placeholder="メールアドレス"
+            />
+            <button (click)="inviteMember()" [disabled]="!inviteEmail.trim()">
+              招待
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
