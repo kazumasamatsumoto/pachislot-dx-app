@@ -98,8 +98,18 @@
       </div>
     </section>
 
-    <button (click)="resetCounters()" class="netflix-button reset-button">
-      リセット
-    </button>
+    <!-- ボタンエリア -->
+    <div class="button-area">
+      <button (click)="resetCounters()" class="netflix-button reset-button">
+        リセット
+      </button>
+      <button
+        (click)="saveToFirestore()"
+        class="netflix-button save-button"
+        [disabled]="isSaving || totalSpins === 0"
+      >
+        {{ isSaving ? "保存中..." : "保存" }}
+      </button>
+    </div>
   </div>
 </div>
