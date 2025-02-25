@@ -5,6 +5,9 @@ import { CounterItemComponent } from '../shared/counter-item/counter-item.compon
 import { AimJuggler } from '../models/aim-juggler';
 import { MyJuggler5 } from '../models/my-juggler5';
 import { SlotMachineData } from '../models/slot-probability.interface';
+import { FirestoreService } from '../services/firestore.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SaveDialogComponent } from '../shared/save-dialog/save-dialog.component';
 
 interface CounterState {
   totalSpins: number;
@@ -27,8 +30,12 @@ export class Page1Component implements OnInit {
   totalSpins = 0;
   spinsInput = 0;
   selectedMachine: 'aim' | 'my' = 'aim';
+  isSaving = false;
 
-  constructor() {
+  constructor(
+    private firestoreService: FirestoreService,
+    private dialog: MatDialog
+  ) {
     this.aimJuggler = new AimJuggler();
     this.myJuggler = new MyJuggler5();
     this.slotData = this.aimJuggler;
@@ -187,5 +194,55 @@ export class Page1Component implements OnInit {
     if (currentProbability <= setting1Prob) return 'low-setting';
     if (currentProbability >= setting6Prob) return 'high-setting';
     return 'mid-setting';
+  }
+
+  saveToFirestore(): void {
+    const dialogRef = this.dialog.open(SaveDialogComponent, {
+      width: '350px',
+      data: { message: 'データを保存してリセットしますか？' },
+      autoFocus: true, // 自動フォーカスを有効に
+      restoreFocus: true, // ダイアログが閉じた後にフォーカスを復元
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.isSaving = true;
+
+        // 確率と設定推測のデータを計算
+        const symbolsData = this.slotData.symbols.map((symbol) => {
+          const symbolName = symbol.symbolName;
+          const count = this.counters[symbolName] || 0;
+          return {
+            symbolName: symbolName,
+            count: count,
+            probability: this.totalSpins > 0 ? count / this.totalSpins : 0,
+            probabilityPercentage: this.calculateProbability(count),
+            probabilityFraction: this.calculateProbabilityFraction(count),
+            estimatedSetting: this.estimateSetting(symbolName, count),
+          };
+        });
+
+        const dataToSave = {
+          machine: this.selectedMachine,
+          totalSpins: this.totalSpins,
+          symbolsData: symbolsData, // 確率と設定推測データには各シンボルのカウント数も含まれている
+          date: new Date(),
+        };
+
+        this.firestoreService
+          .saveCounterHistory(dataToSave)
+          .then(() => {
+            this.resetCounters();
+            alert('データが保存されました');
+          })
+          .catch((error) => {
+            console.error('保存エラー:', error);
+            alert('データの保存に失敗しました');
+          })
+          .finally(() => {
+            this.isSaving = false;
+          });
+      }
+    });
   }
 }
