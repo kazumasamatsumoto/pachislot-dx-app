@@ -1,0 +1,67 @@
+<div class="records-container" *ngIf="displayedRecords.length > 0">
+  <h3>{{ currentDate | date : "yyyy年M月" }}の記録一覧</h3>
+  <table mat-table [dataSource]="displayedRecords" class="mat-elevation-z8">
+    <!-- 日付 -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>日付</th>
+      <td mat-cell *matCellDef="let record">
+        {{ record.date | date : "yyyy/MM/dd" }}
+      </td>
+    </ng-container>
+
+    <!-- 店名 -->
+    <ng-container matColumnDef="storeName">
+      <th mat-header-cell *matHeaderCellDef>店名</th>
+      <td mat-cell *matCellDef="let record">{{ record.storeName }}</td>
+    </ng-container>
+
+    <!-- イベントの種類 -->
+    <ng-container matColumnDef="eventType">
+      <th mat-header-cell *matHeaderCellDef>イベント</th>
+      <td mat-cell *matCellDef="let record">{{ record.eventType }}</td>
+    </ng-container>
+
+    <!-- 投資 -->
+    <ng-container matColumnDef="investment">
+      <th mat-header-cell *matHeaderCellDef>投資 (円)</th>
+      <td mat-cell *matCellDef="let record">
+        {{ record.investment | number }}
+      </td>
+    </ng-container>
+
+    <!-- 回収 -->
+    <ng-container matColumnDef="recovery">
+      <th mat-header-cell *matHeaderCellDef>回収 (円)</th>
+      <td mat-cell *matCellDef="let record">
+        {{ record.recovery | number }}
+      </td>
+    </ng-container>
+
+    <!-- 収支 -->
+    <ng-container matColumnDef="profit">
+      <th mat-header-cell *matHeaderCellDef>収支 (円)</th>
+      <td
+        mat-cell
+        *matCellDef="let record"
+        [ngClass]="
+          calculateProfit(record.investment, record.recovery) >= 0
+            ? 'profit-positive'
+            : 'profit-negative'
+        "
+      >
+        {{ calculateProfit(record.investment, record.recovery) | number }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<div class="no-records" *ngIf="!isLoading && displayedRecords.length === 0">
+  <p>
+    {{
+      currentDate | date : "yyyy年M月"
+    }}の記録はありません。新しい記録を追加してください。
+  </p>
+</div> 

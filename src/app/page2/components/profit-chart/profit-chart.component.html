@@ -1,0 +1,6 @@
+<div class="chart-container" *ngIf="displayedRecords.length > 0">
+  <h3>{{ currentDate | date : "yyyy年M月" }}の収支推移</h3>
+  <div class="chart-wrapper">
+    <canvas #profitChart></canvas>
+  </div>
+</div> 

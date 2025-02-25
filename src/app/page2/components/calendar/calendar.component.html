@@ -1,0 +1,33 @@
+<div class="calendar-view" [class.disabled]="isLoading">
+  <div class="calendar-header">
+    <button mat-icon-button (click)="prevMonth()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <h3>{{ currentDate | date : "yyyy年M月" }}</h3>
+    <button mat-icon-button (click)="nextMonth()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
+
+  <div class="calendar-grid">
+    <div class="weekday-header" *ngFor="let day of weekDays">{{ day }}</div>
+    <div
+      *ngFor="let day of calendarDays"
+      class="calendar-day"
+      [class.other-month]="day.otherMonth"
+      [class.today]="day.isToday"
+      [class.has-records]="day.hasRecords"
+      (click)="selectDate(day.date)"
+    >
+      <div class="day-number">{{ day.date | date : "d" }}</div>
+      <div
+        *ngIf="day.profit !== null"
+        class="day-profit"
+        [class.profit-positive]="day.profit >= 0"
+        [class.profit-negative]="day.profit < 0"
+      >
+        {{ day.profit >= 0 ? "+" : "" }}{{ day.profit | number }}円
+      </div>
+    </div>
+  </div>
+</div> 

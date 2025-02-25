@@ -1,13 +1,6 @@
-.calendar-container {
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-  position: relative;
-}
-
 .calendar-view {
   margin-bottom: 30px;
-
+  
   &.disabled {
     opacity: 0.7;
     pointer-events: none;
@@ -19,7 +12,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-
+  
   h3 {
     margin: 0;
   }
@@ -37,11 +30,11 @@
   padding: 10px 0;
   background-color: #f5f5f5;
   color: #000000;
-
+  
   &:first-child {
     color: #d32f2f;
   }
-
+  
   &:last-child {
     color: #1565c0;
   }
@@ -54,32 +47,32 @@
   cursor: pointer;
   transition: background-color 0.2s;
   background-color: #ffffff;
-
-  &:nth-child(7n + 1) .day-number {
+  
+  &:nth-child(7n+1) .day-number {
     color: #d32f2f;
   }
-
+  
   &:nth-child(7n) .day-number {
     color: #1565c0;
   }
-
+  
   .day-number {
     color: #000000;
   }
-
+  
   &:hover {
     background-color: #f0f0f0;
   }
-
+  
   &.other-month {
     opacity: 0.5;
   }
-
+  
   &.today {
     background-color: #e8f0fe;
     border-color: #3f51b5;
   }
-
+  
   &.has-records {
     font-weight: bold;
   }
@@ -103,70 +96,4 @@
 .profit-negative {
   color: #b71c1c;
   font-weight: bold;
-}
-
-.input-card {
-  margin-bottom: 20px;
-
-  &.disabled {
-    opacity: 0.7;
-    pointer-events: none;
-  }
-}
-
-.form-row {
-  margin-bottom: 15px;
-
-  mat-form-field {
-    width: 100%;
-  }
-}
-
-.records-container {
-  margin-top: 30px;
-}
-
-table {
-  width: 100%;
-}
-
-h2 {
-  color: #3f51b5;
-  margin-bottom: 20px;
-}
-
-mat-card-title {
-  margin-bottom: 15px;
-  color: #000000;
-}
-
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.no-records {
-  text-align: center;
-  margin-top: 30px;
-  color: #666;
-  font-style: italic;
-}
-
-.chart-container {
-  margin-top: 30px;
-  margin-bottom: 30px;
-
-  h3 {
-    color: #3f51b5;
-    margin-bottom: 15px;
-  }
-}
-
-.chart-wrapper {
-  height: 300px;
-  background-color: #fff;
-  padding: 15px 30px 15px 15px;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+} 

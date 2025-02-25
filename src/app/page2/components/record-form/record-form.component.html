@@ -1,0 +1,86 @@
+<mat-card class="input-card" [class.disabled]="isLoading">
+  <mat-card-header>
+    <mat-card-title>新しい記録を追加</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>日付を選択</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [(ngModel)]="newRecord.date"
+          (dateChange)="onDateSelected($event)"
+          [disabled]="isLoading"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="picker"
+          [disabled]="isLoading"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>店名</mat-label>
+        <input
+          matInput
+          [(ngModel)]="newRecord.storeName"
+          required
+          [disabled]="isLoading"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>イベントの種類</mat-label>
+        <mat-select
+          [(ngModel)]="newRecord.eventType"
+          required
+          [disabled]="isLoading"
+        >
+          <mat-option *ngFor="let type of eventTypes" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>投資 (円)</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="newRecord.investment"
+          [disabled]="isLoading"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>回収 (円)</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="newRecord.recovery"
+          [disabled]="isLoading"
+        />
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onSaveRecord()"
+      [disabled]="isLoading"
+    >
+      保存
+    </button>
+  </mat-card-actions>
+</mat-card> 

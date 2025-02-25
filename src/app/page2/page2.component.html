@@ -1,1 +1,42 @@
-<p>page2 works!</p>
+<div class="calendar-container">
+  <h2>収支カレンダー</h2>
+
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <!-- カレンダーコンポーネント -->
+  <app-calendar
+    [records]="records"
+    [currentDate]="currentDate"
+    [isLoading]="isLoading"
+    (dateSelected)="selectDate($event)"
+    (monthChanged)="onMonthChanged($event)"
+  >
+  </app-calendar>
+
+  <!-- 記録フォームコンポーネント -->
+  <app-record-form
+    [newRecord]="newRecord"
+    [isLoading]="isLoading"
+    [eventTypes]="eventTypes"
+    (saveRecord)="saveRecord()"
+    (dateChange)="onDateSelected($event)"
+  >
+  </app-record-form>
+
+  <!-- 記録リストコンポーネント -->
+  <app-record-list
+    [displayedRecords]="displayedRecords"
+    [currentDate]="currentDate"
+    [isLoading]="isLoading"
+  >
+  </app-record-list>
+
+  <!-- 収支チャートコンポーネント -->
+  <app-profit-chart
+    [displayedRecords]="displayedRecords"
+    [currentDate]="currentDate"
+  >
+  </app-profit-chart>
+</div>
