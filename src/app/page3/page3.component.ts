@@ -1,16 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from '@angular/fire/compat';
 import {
-  AngularFireAuthModule,
-  AngularFireAuth,
-} from '@angular/fire/compat/auth';
+  Auth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  user,
+} from '@angular/fire/auth';
 import {
-  AngularFirestoreModule,
-  AngularFirestore,
-} from '@angular/fire/compat/firestore';
-import firebase from 'firebase/compat/app';
+  Firestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  addDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from '@angular/fire/firestore';
 
 interface User {
   uid: string;
@@ -31,13 +40,7 @@ interface Team {
 @Component({
   selector: 'app-page3',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './page3.component.html',
   styleUrl: './page3.component.scss',
 })
@@ -50,22 +53,23 @@ export class Page3Component implements OnInit {
   loading: boolean = true;
   error: string = '';
 
-  constructor(
-    private auth: AngularFireAuth,
-    private firestore: AngularFirestore
-  ) {}
+  constructor(private auth: Auth, private firestore: Firestore) {}
 
   ngOnInit(): void {
-    this.auth.authState.subscribe((user) => {
-      if (user) {
+    // ユーザー認証状態の監視を設定
+    user(this.auth).subscribe(async (firebaseUser) => {
+      this.loading = true;
+      if (firebaseUser) {
+        // ユーザーがログインしている場合
         this.user = {
-          uid: user.uid,
-          email: user.email || '',
-          displayName: user.displayName || '',
-          photoURL: user.photoURL || '',
+          uid: firebaseUser.uid,
+          email: firebaseUser.email || '',
+          displayName: firebaseUser.displayName || 'ユーザー',
+          photoURL: firebaseUser.photoURL || '',
         };
-        this.loadUserTeams();
+        await this.loadUserTeams();
       } else {
+        // ユーザーがログインしていない場合
         this.user = null;
         this.teams = [];
         this.currentTeam = null;
@@ -76,8 +80,8 @@ export class Page3Component implements OnInit {
 
   async login() {
     try {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      await this.auth.signInWithPopup(provider);
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(this.auth, provider);
     } catch (error) {
       console.error('ログインエラー:', error);
       this.error = 'ログインに失敗しました。もう一度お試しください。';
@@ -86,7 +90,7 @@ export class Page3Component implements OnInit {
 
   async logout() {
     try {
-      await this.auth.signOut();
+      await signOut(this.auth);
     } catch (error) {
       console.error('ログアウトエラー:', error);
       this.error = 'ログアウトに失敗しました。';
@@ -98,45 +102,50 @@ export class Page3Component implements OnInit {
 
     try {
       // ユーザーがリーダーのチームを取得
-      const leaderTeamsSnapshot = await this.firestore
-        .collection<Team>('teams', (ref) =>
-          ref.where('leaderId', '==', this.user?.uid)
-        )
-        .get()
-        .toPromise();
+      const teamsRef = collection(this.firestore, 'teams');
+      const leaderQuery = query(
+        teamsRef,
+        where('leaderId', '==', this.user.uid)
+      );
+      const leaderSnapshot = await getDocs(leaderQuery);
 
       // ユーザーがメンバーのチームを取得
-      const memberTeamsSnapshot = await this.firestore
-        .collection<Team>('teams', (ref) =>
-          ref.where('members', 'array-contains', {
-            uid: this.user?.uid,
-            email: this.user?.email,
-            displayName: this.user?.displayName,
-            photoURL: this.user?.photoURL,
-          })
-        )
-        .get()
-        .toPromise();
+      const memberQuery = query(
+        teamsRef,
+        where('members', 'array-contains', {
+          uid: this.user.uid,
+          email: this.user.email,
+          displayName: this.user.displayName,
+          photoURL: this.user.photoURL,
+        })
+      );
+      const memberSnapshot = await getDocs(memberQuery);
 
       this.teams = [];
 
-      leaderTeamsSnapshot?.forEach((doc) => {
-        this.teams.push({ id: doc.id, ...doc.data() });
+      leaderSnapshot.forEach((doc) => {
+        this.teams.push({ id: doc.id, ...(doc.data() as Omit<Team, 'id'>) });
       });
 
-      memberTeamsSnapshot?.forEach((doc) => {
+      memberSnapshot.forEach((doc) => {
         // 重複を避ける
         if (!this.teams.some((team) => team.id === doc.id)) {
-          this.teams.push({ id: doc.id, ...doc.data() });
+          this.teams.push({ id: doc.id, ...(doc.data() as Omit<Team, 'id'>) });
         }
       });
 
       if (this.teams.length > 0) {
         this.selectTeam(this.teams[0]);
+      } else {
+        // チームがない場合は現在のチームをnullに設定
+        this.currentTeam = null;
       }
     } catch (error) {
       console.error('チーム読み込みエラー:', error);
       this.error = 'チームの読み込みに失敗しました。';
+    } finally {
+      // 読み込み状態を終了
+      this.loading = false;
     }
   }
 
@@ -148,18 +157,23 @@ export class Page3Component implements OnInit {
     if (!this.user || !this.newTeamName.trim()) return;
 
     try {
-      const newTeam: Team = {
+      const newTeam: Omit<Team, 'id'> = {
         name: this.newTeamName.trim(),
         leaderId: this.user.uid,
         members: [this.user],
         createdAt: new Date(),
       };
 
-      const docRef = await this.firestore.collection('teams').add(newTeam);
-      newTeam.id = docRef.id;
+      const teamsRef = collection(this.firestore, 'teams');
+      const docRef = await addDoc(teamsRef, newTeam);
 
-      this.teams.push(newTeam);
-      this.currentTeam = newTeam;
+      const createdTeam: Team = {
+        ...newTeam,
+        id: docRef.id,
+      };
+
+      this.teams.push(createdTeam);
+      this.currentTeam = createdTeam;
       this.newTeamName = '';
     } catch (error) {
       console.error('チーム作成エラー:', error);
@@ -171,20 +185,20 @@ export class Page3Component implements OnInit {
     if (!this.currentTeam || !this.inviteEmail.trim()) return;
 
     try {
-      // メールアドレスからユーザーを検索（実際の実装ではセキュリティルールの設定が必要）
-      const userSnapshot = await this.firestore
-        .collection('users', (ref) =>
-          ref.where('email', '==', this.inviteEmail.trim())
-        )
-        .get()
-        .toPromise();
+      // メールアドレスからユーザーを検索
+      const usersRef = collection(this.firestore, 'users');
+      const userQuery = query(
+        usersRef,
+        where('email', '==', this.inviteEmail.trim())
+      );
+      const userSnapshot = await getDocs(userQuery);
 
-      if (userSnapshot?.empty) {
+      if (userSnapshot.empty) {
         this.error = 'ユーザーが見つかりませんでした。';
         return;
       }
 
-      const userData = userSnapshot?.docs[0].data() as User;
+      const userData = userSnapshot.docs[0].data() as User;
 
       // すでにメンバーかチェック
       if (
@@ -195,12 +209,10 @@ export class Page3Component implements OnInit {
       }
 
       // メンバーを追加
-      await this.firestore
-        .collection('teams')
-        .doc(this.currentTeam.id)
-        .update({
-          members: firebase.firestore.FieldValue.arrayUnion(userData),
-        });
+      const teamRef = doc(this.firestore, 'teams', this.currentTeam.id!);
+      await updateDoc(teamRef, {
+        members: arrayUnion(userData),
+      });
 
       // ローカルの状態を更新
       this.currentTeam.members.push(userData);
@@ -226,12 +238,10 @@ export class Page3Component implements OnInit {
       );
       if (!memberToRemove) return;
 
-      await this.firestore
-        .collection('teams')
-        .doc(this.currentTeam.id)
-        .update({
-          members: firebase.firestore.FieldValue.arrayRemove(memberToRemove),
-        });
+      const teamRef = doc(this.firestore, 'teams', this.currentTeam.id!);
+      await updateDoc(teamRef, {
+        members: arrayRemove(memberToRemove),
+      });
 
       // ローカルの状態を更新
       this.currentTeam.members = this.currentTeam.members.filter(

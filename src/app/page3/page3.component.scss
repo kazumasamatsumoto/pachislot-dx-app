@@ -2,7 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 // ローディングスピナー
@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: center;
   height: 200px;
-  
+
   .spinner {
     width: 40px;
     height: 40px;
@@ -21,9 +21,11 @@
     border-top-color: #3498db;
     animation: spin 1s ease-in-out infinite;
   }
-  
+
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 }
 
@@ -37,7 +39,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   button {
     background: none;
     border: none;
@@ -49,40 +51,110 @@
 
 // ログイン画面
 .login-container {
-  text-align: center;
-  padding: 40px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+
   h2 {
-    margin-bottom: 20px;
-    color: #333;
+    margin-bottom: 2rem;
+    color: #ffffff;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
-  
-  .login-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background-color: #ffffff;
-    color: #757575;
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 20px auto 0;
-    transition: background-color 0.3s;
-    
-    &:hover {
-      background-color: #f1f3f4;
+
+  .login-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+
+      .logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      p {
+        color: #666;
+        line-height: 1.5;
+      }
     }
-    
-    img {
-      width: 20px;
-      height: 20px;
+
+    .login-footer {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+
+      a {
+        color: #4285f4;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
+  }
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #757575;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+
+  &:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+  }
+
+  span {
+    margin-left: 4px;
+  }
+}
+
+.google-button {
+  border: 1px solid #ddd;
+
+  &:hover {
+    background-color: #f8f8f8;
   }
 }
 
@@ -95,28 +167,28 @@
   background-color: #f5f5f5;
   border-radius: 8px;
   margin-bottom: 30px;
-  
+
   img {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
   }
-  
+
   .user-info {
     flex: 1;
-    
+
     h2 {
       margin: 0 0 5px;
       color: #333;
     }
-    
+
     p {
       margin: 0 0 15px;
       color: #666;
     }
   }
-  
+
   .logout-button {
     background-color: transparent;
     color: #f44336;
@@ -125,7 +197,7 @@
     padding: 8px 16px;
     cursor: pointer;
     transition: all 0.3s;
-    
+
     &:hover {
       background-color: #f44336;
       color: white;
@@ -138,7 +210,7 @@
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 30px;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
@@ -149,7 +221,7 @@
   background-color: #f5f5f5;
   border-radius: 8px;
   padding: 20px;
-  
+
   h3 {
     margin-top: 0;
     margin-bottom: 15px;
@@ -157,12 +229,12 @@
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
   }
-  
+
   ul {
     list-style: none;
     padding: 0;
     margin: 0 0 20px;
-    
+
     li {
       padding: 10px 15px;
       border-radius: 4px;
@@ -171,37 +243,37 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      
+
       &:hover {
         background-color: #e0e0e0;
       }
-      
+
       &.active {
         background-color: #e3f2fd;
         font-weight: bold;
       }
     }
   }
-  
+
   .create-team {
     margin-top: 20px;
-    
+
     h4 {
       margin-top: 0;
       color: #333;
     }
-    
+
     .team-form {
       display: flex;
       gap: 10px;
-      
+
       input {
         flex: 1;
         padding: 8px 12px;
         border: 1px solid #ddd;
         border-radius: 4px;
       }
-      
+
       button {
         background-color: #4caf50;
         color: white;
@@ -209,7 +281,7 @@
         border-radius: 4px;
         padding: 8px 16px;
         cursor: pointer;
-        
+
         &:disabled {
           background-color: #a5d6a7;
           cursor: not-allowed;
@@ -225,60 +297,60 @@
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  
+
   h3 {
     margin-top: 0;
     color: #333;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
   }
-  
+
   .team-members {
     margin-bottom: 30px;
-    
+
     h4 {
       color: #333;
     }
-    
+
     ul {
       list-style: none;
       padding: 0;
-      
+
       li {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 10px 0;
         border-bottom: 1px solid #eee;
-        
+
         &:last-child {
           border-bottom: none;
         }
-        
+
         .member-info {
           display: flex;
           align-items: center;
           gap: 15px;
-          
+
           img {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
           }
-          
+
           .member-name {
             margin: 0 0 5px;
             font-weight: 500;
           }
-          
+
           .member-email {
             margin: 0;
             color: #666;
             font-size: 14px;
           }
         }
-        
+
         .remove-button {
           background-color: transparent;
           color: #f44336;
@@ -286,7 +358,7 @@
           border-radius: 4px;
           padding: 5px 10px;
           cursor: pointer;
-          
+
           &:hover {
             background-color: #f44336;
             color: white;
@@ -295,23 +367,23 @@
       }
     }
   }
-  
+
   .invite-member {
     h4 {
       color: #333;
     }
-    
+
     .invite-form {
       display: flex;
       gap: 10px;
-      
+
       input {
         flex: 1;
         padding: 8px 12px;
         border: 1px solid #ddd;
         border-radius: 4px;
       }
-      
+
       button {
         background-color: #2196f3;
         color: white;
@@ -319,7 +391,7 @@
         border-radius: 4px;
         padding: 8px 16px;
         cursor: pointer;
-        
+
         &:disabled {
           background-color: #90caf9;
           cursor: not-allowed;
@@ -336,8 +408,81 @@
   font-size: 12px;
   padding: 3px 8px;
   border-radius: 12px;
-  
+
   &.member {
     background-color: #2196f3;
+  }
+}
+
+// チームがない場合の表示
+.no-teams {
+  width: 100%;
+
+  .empty-state {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+
+    svg {
+      color: #9e9e9e;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .create-team-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 300px;
+      margin: 0 auto;
+
+      .team-name-input {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+
+        &:focus {
+          outline: none;
+          border-color: #4285f4;
+          box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+        }
+      }
+
+      .create-team-button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: #43a047;
+        }
+
+        &:disabled {
+          background-color: #a5d6a7;
+          cursor: not-allowed;
+        }
+      }
+    }
   }
 }
