@@ -16,13 +16,13 @@ interface CounterState {
 }
 
 @Component({
-  selector: 'app-page1',
+  selector: 'app-counter-history',
   standalone: true,
   imports: [CommonModule, FormsModule, CounterItemComponent],
-  templateUrl: './page1.component.html',
-  styleUrls: ['./page1.component.scss'],
+  templateUrl: './counter-history.component.html',
+  styleUrls: ['./counter-history.component.scss'],
 })
-export class Page1Component implements OnInit {
+export class CounterHistoryComponent implements OnInit {
   slotData: SlotMachineData;
   private aimJuggler: AimJuggler;
   private myJuggler: MyJuggler5;

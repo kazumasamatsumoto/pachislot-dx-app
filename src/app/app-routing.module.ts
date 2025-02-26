@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Page1Component } from './page1/page1.component';
+import { CounterHistoryComponent } from './counter-history/counter-history.component';
 
-const routes: Routes = [{ path: '', component: Page1Component }];
+const routes: Routes = [{ path: '', component: CounterHistoryComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

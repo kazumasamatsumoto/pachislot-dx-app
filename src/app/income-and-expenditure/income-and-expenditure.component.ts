@@ -29,7 +29,7 @@ interface CalendarDay {
 }
 
 @Component({
-  selector: 'app-page2',
+  selector: 'app-income-and-expenditure',
   standalone: true,
   imports: [
     CommonModule,
@@ -50,10 +50,10 @@ interface CalendarDay {
     RecordListComponent,
     ProfitChartComponent,
   ],
-  templateUrl: './page2.component.html',
-  styleUrl: './page2.component.scss',
+  templateUrl: './income-and-expenditure.component.html',
+  styleUrls: ['./income-and-expenditure.component.scss'],
 })
-export class Page2Component implements OnInit {
+export class IncomeAndExpenditureComponent implements OnInit {
   selectedDate: Date = new Date();
   currentDate: Date = new Date();
   newRecord: EventRecord = {

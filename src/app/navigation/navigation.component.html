@@ -23,12 +23,18 @@
 <div class="side-menu" [class.active]="isMenuOpen">
   <ul>
     <li>
-      <a routerLink="/page1" routerLinkActive="active" (click)="toggleMenu()"
+      <a
+        routerLink="/counter-history"
+        routerLinkActive="active"
+        (click)="toggleMenu()"
         >カチカチ君</a
       >
     </li>
     <li>
-      <a routerLink="/page2" routerLinkActive="active" (click)="toggleMenu()"
+      <a
+        routerLink="/income-and-expenditure"
+        routerLinkActive="active"
+        (click)="toggleMenu()"
         >収支カレンダー</a
       >
     </li>
