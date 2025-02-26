@@ -1,0 +1,343 @@
+.account-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+// ローディングスピナー
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #3498db;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}
+
+// エラーメッセージ
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  button {
+    background: none;
+    border: none;
+    color: #c62828;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+
+// ログイン画面
+.login-container {
+  text-align: center;
+  padding: 40px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ffffff;
+    color: #757575;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 20px auto 0;
+    transition: background-color 0.3s;
+    
+    &:hover {
+      background-color: #f1f3f4;
+    }
+    
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+// ユーザープロフィール
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .user-info {
+    flex: 1;
+    
+    h2 {
+      margin: 0 0 5px;
+      color: #333;
+    }
+    
+    p {
+      margin: 0 0 15px;
+      color: #666;
+    }
+  }
+  
+  .logout-button {
+    background-color: transparent;
+    color: #f44336;
+    border: 1px solid #f44336;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    
+    &:hover {
+      background-color: #f44336;
+      color: white;
+    }
+  }
+}
+
+// チーム管理
+.team-management {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// チームリスト
+.team-list {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 20px;
+  
+  h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    
+    li {
+      padding: 10px 15px;
+      border-radius: 4px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      &:hover {
+        background-color: #e0e0e0;
+      }
+      
+      &.active {
+        background-color: #e3f2fd;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  .create-team {
+    margin-top: 20px;
+    
+    h4 {
+      margin-top: 0;
+      color: #333;
+    }
+    
+    .team-form {
+      display: flex;
+      gap: 10px;
+      
+      input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        cursor: pointer;
+        
+        &:disabled {
+          background-color: #a5d6a7;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+// チーム詳細
+.team-details {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+  h3 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .team-members {
+    margin-bottom: 30px;
+    
+    h4 {
+      color: #333;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        .member-info {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          
+          .member-name {
+            margin: 0 0 5px;
+            font-weight: 500;
+          }
+          
+          .member-email {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+          }
+        }
+        
+        .remove-button {
+          background-color: transparent;
+          color: #f44336;
+          border: 1px solid #f44336;
+          border-radius: 4px;
+          padding: 5px 10px;
+          cursor: pointer;
+          
+          &:hover {
+            background-color: #f44336;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  
+  .invite-member {
+    h4 {
+      color: #333;
+    }
+    
+    .invite-form {
+      display: flex;
+      gap: 10px;
+      
+      input {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      
+      button {
+        background-color: #2196f3;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        cursor: pointer;
+        
+        &:disabled {
+          background-color: #90caf9;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+// ロールバッジ
+.role-badge {
+  background-color: #ff9800;
+  color: white;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  
+  &.member {
+    background-color: #2196f3;
+  }
+}
