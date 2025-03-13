@@ -11,4 +11,5 @@ export interface SlotSymbolProbabilities {
 export interface SlotMachineData {
   machineName: string;
   symbols: SlotSymbolProbabilities[];
+  dataSource?: string;
 }

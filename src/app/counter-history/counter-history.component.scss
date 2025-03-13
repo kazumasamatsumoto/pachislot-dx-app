@@ -1,18 +1,27 @@
 // メディアクエリのブレークポイント
 $breakpoint-mobile: 480px;
 $breakpoint-tablet: 768px;
+$breakpoint-small-mobile: 360px;
 
 .netflix-theme {
   background-color: #141414;
   min-height: 100vh;
   color: #ffffff;
-  padding: 2rem;
+  padding: 2rem 1rem;
   font-family: "Helvetica Neue", Arial, sans-serif;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1rem 0.5rem;
+  }
 }
 
 .header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    margin-bottom: 1.5rem;
+  }
 }
 
 h1 {
@@ -23,6 +32,18 @@ h1 {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: $breakpoint-small-mobile) {
+    font-size: 1.8rem;
+  }
 }
 
 .subtitle {
@@ -30,6 +51,10 @@ h1 {
   font-size: 1.2rem;
   color: #999;
   margin-top: 0.5rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1rem;
+  }
 }
 
 .glass-effect {
@@ -38,6 +63,11 @@ h1 {
   border-radius: 16px;
   padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1rem;
+    border-radius: 12px;
+  }
 }
 
 .main-container {
@@ -48,6 +78,10 @@ h1 {
 .spins-counter {
   margin-bottom: 2rem;
   text-align: center;
+
+  @media (max-width: $breakpoint-mobile) {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .spins-input {
@@ -55,6 +89,11 @@ h1 {
   gap: 1rem;
   justify-content: center;
   margin-bottom: 1rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 
 .counter-input-group {
@@ -78,6 +117,11 @@ h1 {
     background: #f40612;
     transform: translateY(-2px);
   }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0.6rem 1rem;
+    min-width: 50px;
+  }
 }
 
 .modern-input {
@@ -97,6 +141,12 @@ h1 {
     border-color: #e50914;
     box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
   }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
 }
 
 .netflix-button {
@@ -113,6 +163,12 @@ h1 {
     background: #f40612;
     transform: translateY(-2px);
   }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    width: 100%;
+  }
 }
 
 .counter-grid {
@@ -120,6 +176,16 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    gap: 0.8rem;
+  }
 }
 
 .counter-item {
@@ -127,6 +193,12 @@ h1 {
 
   &:hover {
     transform: translateY(-5px);
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 }
 
@@ -139,11 +211,19 @@ h1 {
 
 .counter-icon {
   font-size: 1.5rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1.3rem;
+  }
 }
 
 .counter-label {
   font-size: 1.2rem;
   font-weight: bold;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1rem;
+  }
 }
 
 .counter-content {
@@ -155,6 +235,10 @@ h1 {
 .probability {
   color: #999;
   font-size: 0.9rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 0.8rem;
+  }
 }
 
 .probability-value {
@@ -177,6 +261,10 @@ h1 {
   color: #e50914;
   font-weight: bold;
   margin-bottom: 0.5rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1.1rem;
+  }
 }
 
 .reset-button {
@@ -196,6 +284,16 @@ h1 {
   margin-bottom: 2rem;
   color: #e50914;
   text-align: center;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .input-section,
@@ -203,6 +301,16 @@ h1 {
 .prediction-section {
   margin-bottom: 2rem;
   padding: 2rem;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .glass-effect-inner {
@@ -211,6 +319,11 @@ h1 {
   backdrop-filter: blur(5px);
   border-radius: 12px;
   padding: 1.2rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0.8rem;
+    border-radius: 8px;
+  }
 }
 
 // テーブルスタイル
@@ -218,6 +331,7 @@ h1 {
   overflow-x: auto;
   margin: 0 -1rem;
   padding: 0 1rem;
+  -webkit-overflow-scrolling: touch;
 }
 
 .netflix-table {
@@ -231,6 +345,16 @@ h1 {
     padding: 1rem;
     text-align: left;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    @media (max-width: $breakpoint-tablet) {
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      padding: 0.6rem;
+      font-size: 0.8rem;
+    }
   }
 
   th {
@@ -238,6 +362,14 @@ h1 {
     color: #e50914;
     font-size: 1.1rem;
     background: rgba(229, 9, 20, 0.1);
+
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 1rem;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.9rem;
+    }
   }
 
   td {
@@ -267,6 +399,15 @@ h1 {
   .icon {
     font-size: 1.2rem;
     margin-right: 0.5rem;
+
+    @media (max-width: $breakpoint-tablet) {
+      font-size: 1rem;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 0.9rem;
+      margin-right: 0.3rem;
+    }
   }
 
   .total-row {
@@ -283,99 +424,71 @@ h1 {
   }
 }
 
-// レスポンシブ対応
-@media (max-width: $breakpoint-tablet) {
-  .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .input-section,
-  .calculation-section,
-  .prediction-section {
-    padding: 1.5rem;
-  }
-
-  .netflix-table {
-    th,
-    td {
-      padding: 0.8rem;
-      font-size: 0.9rem;
-    }
-
-    .icon {
-      font-size: 1rem;
-    }
-  }
-}
-
-@media (max-width: $breakpoint-mobile) {
-  .section-title {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-  }
-
-  .input-section,
-  .calculation-section,
-  .prediction-section {
-    padding: 1rem;
-  }
-
-  .netflix-table {
-    th,
-    td {
-      padding: 0.6rem;
-      font-size: 0.8rem;
-    }
-  }
-}
-
 .machine-select {
   margin-bottom: 20px;
   padding: 20px;
 
+  @media (max-width: $breakpoint-mobile) {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
   .machine-buttons {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 1rem;
     justify-content: center;
-    margin-top: 15px;
+    margin-bottom: 1.5rem;
 
-    button {
-      min-width: 150px;
-      position: relative;
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s ease;
+    @media (max-width: $breakpoint-tablet) {
+      gap: 0.8rem;
+    }
 
-      &:hover {
-        background-color: rgba(229, 9, 20, 0.3);
-        border-color: rgba(229, 9, 20, 0.5);
-        transform: translateY(-2px);
-      }
+    @media (max-width: $breakpoint-mobile) {
+      gap: 0.5rem;
+    }
+  }
 
-      &.active {
-        background-color: #e50914;
-        border-color: #e50914;
-        box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
-        transform: translateY(-2px);
+  .machine-button {
+    margin-bottom: 0.5rem;
+    white-space: normal;
+    text-align: center;
+    min-width: 140px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
 
-        &:after {
-          content: "";
-          position: absolute;
-          bottom: -8px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 8px;
-          height: 8px;
-          background-color: #e50914;
-          border-radius: 50%;
-        }
+    &:hover {
+      background-color: rgba(229, 9, 20, 0.3);
+      border-color: rgba(229, 9, 20, 0.5);
+      transform: translateY(-2px);
+    }
 
-        &:hover {
-          background-color: #f40612;
-          border-color: #f40612;
-        }
-      }
+    &.active {
+      background-color: #e50914;
+      border-color: #e50914;
+      box-shadow: 0 0 15px rgba(229, 9, 20, 0.5);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: $breakpoint-tablet) {
+      min-width: 120px;
+      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      min-width: 110px;
+      font-size: 0.8rem;
+      padding: 0.6rem 0.8rem;
+    }
+  }
+
+  .juggler-text {
+    display: inline-block;
+
+    @media (max-width: $breakpoint-tablet) {
+      display: block;
     }
   }
 }
@@ -385,6 +498,12 @@ h1 {
   justify-content: center;
   gap: 1rem;
   margin-top: 2rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+  }
 }
 
 .save-button {
@@ -406,5 +525,28 @@ h1 {
 
   &:hover {
     background: #e50914;
+  }
+}
+
+.data-source {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #999;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  a {
+    color: #e50914;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #ff6b6b;
+      text-decoration: underline;
+    }
   }
 }

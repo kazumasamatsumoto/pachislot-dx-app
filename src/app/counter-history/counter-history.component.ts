@@ -4,6 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { CounterItemComponent } from '../shared/counter-item/counter-item.component';
 import { AimJuggler } from '../models/aim-juggler';
 import { MyJuggler5 } from '../models/my-juggler5';
+import { FunkyJuggler } from '../models/funky-juggler';
+import { HappyJuggler } from '../models/happy-juggler';
+import { GogoJuggler } from '../models/gogo-juggler';
+import { MisterJuggler } from '../models/mister-juggler';
+import { JugglerGirls } from '../models/juggler-girls';
 import { SlotMachineData } from '../models/slot-probability.interface';
 import { FirestoreService } from '../services/firestore.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,7 +17,7 @@ import { SaveDialogComponent } from '../shared/save-dialog/save-dialog.component
 interface CounterState {
   totalSpins: number;
   counters: { [key: string]: number };
-  selectedMachine: 'aim' | 'my';
+  selectedMachine: 'aim' | 'my' | 'funky' | 'happy' | 'gogo' | 'mister' | 'girls';
 }
 
 @Component({
@@ -26,11 +31,17 @@ export class CounterHistoryComponent implements OnInit {
   slotData: SlotMachineData;
   private aimJuggler: AimJuggler;
   private myJuggler: MyJuggler5;
+  private funkyJuggler: FunkyJuggler;
+  private happyJuggler: HappyJuggler;
+  private gogoJuggler: GogoJuggler;
+  private misterJuggler: MisterJuggler;
+  private jugglerGirls: JugglerGirls;
   counters: { [key: string]: number } = {};
   totalSpins = 0;
   spinsInput = 0;
-  selectedMachine: 'aim' | 'my' = 'aim';
+  selectedMachine: 'aim' | 'my' | 'funky' | 'happy' | 'gogo' | 'mister' | 'girls' = 'aim';
   isSaving = false;
+  dataSource: string = '';
 
   constructor(
     private firestoreService: FirestoreService,
@@ -38,6 +49,11 @@ export class CounterHistoryComponent implements OnInit {
   ) {
     this.aimJuggler = new AimJuggler();
     this.myJuggler = new MyJuggler5();
+    this.funkyJuggler = new FunkyJuggler();
+    this.happyJuggler = new HappyJuggler();
+    this.gogoJuggler = new GogoJuggler();
+    this.misterJuggler = new MisterJuggler();
+    this.jugglerGirls = new JugglerGirls();
     this.slotData = this.aimJuggler;
     this.initializeCounters();
   }
@@ -46,10 +62,31 @@ export class CounterHistoryComponent implements OnInit {
     this.loadCounters();
   }
 
-  selectMachine(machine: 'aim' | 'my'): void {
+  selectMachine(machine: 'aim' | 'my' | 'funky' | 'happy' | 'gogo' | 'mister' | 'girls'): void {
     if (this.selectedMachine !== machine) {
       this.selectedMachine = machine;
-      this.slotData = machine === 'aim' ? this.aimJuggler : this.myJuggler;
+      if (machine === 'aim') {
+        this.slotData = this.aimJuggler;
+        this.dataSource = this.aimJuggler.dataSource;
+      } else if (machine === 'my') {
+        this.slotData = this.myJuggler;
+        this.dataSource = this.myJuggler.dataSource;
+      } else if (machine === 'happy') {
+        this.slotData = this.happyJuggler;
+        this.dataSource = this.happyJuggler.dataSource;
+      } else if (machine === 'gogo') {
+        this.slotData = this.gogoJuggler;
+        this.dataSource = this.gogoJuggler.dataSource;
+      } else if (machine === 'mister') {
+        this.slotData = this.misterJuggler;
+        this.dataSource = this.misterJuggler.dataSource;
+      } else if (machine === 'girls') {
+        this.slotData = this.jugglerGirls;
+        this.dataSource = this.jugglerGirls.dataSource;
+      } else {
+        this.slotData = this.funkyJuggler;
+        this.dataSource = this.funkyJuggler.dataSource;
+      }
       this.counters = {};
       this.totalSpins = 0;
       this.spinsInput = 0;
@@ -72,8 +109,21 @@ export class CounterHistoryComponent implements OnInit {
         const state: CounterState = JSON.parse(savedState);
         this.totalSpins = state.totalSpins || 0;
         this.selectedMachine = state.selectedMachine || 'aim';
-        this.slotData =
-          this.selectedMachine === 'aim' ? this.aimJuggler : this.myJuggler;
+        if (this.selectedMachine === 'aim') {
+          this.slotData = this.aimJuggler;
+        } else if (this.selectedMachine === 'my') {
+          this.slotData = this.myJuggler;
+        } else if (this.selectedMachine === 'happy') {
+          this.slotData = this.happyJuggler;
+        } else if (this.selectedMachine === 'gogo') {
+          this.slotData = this.gogoJuggler;
+        } else if (this.selectedMachine === 'mister') {
+          this.slotData = this.misterJuggler;
+        } else if (this.selectedMachine === 'girls') {
+          this.slotData = this.jugglerGirls;
+        } else {
+          this.slotData = this.funkyJuggler;
+        }
         this.initializeCounters();
         if (state.counters) {
           this.slotData.symbols.forEach((symbol) => {
@@ -110,7 +160,28 @@ export class CounterHistoryComponent implements OnInit {
       '共通チェリー(ボーナス同時成立)': '🍒',
       '単独チェリー1(5番チェリー)': '🍒',
       '単独チェリー2(14番チェリー)': '🍒',
+      '単独チェリー(1番チェリー)': '🍒',
+      '単独チェリー(13番チェリー)': '🍒',
+      '単独ボーナス': '💰',
+      '単独BIG': '💰',
+      '単独REG': '💎',
+      '共通チェリー+BIG': '🍒',
+      '共通チェリー+REG': '🍒',
+      '単独チェリー1+BIG': '🍒',
+      '単独チェリー2+BIG': '🍒',
+      '単独チェリー1+BIG(1番チェリー)': '🍒',
+      '単独チェリー2+BIG(13番チェリー)': '🍒',
+      '単独チェリー+1枚役(1番チェリー)': '🍒',
+      '単独チェリー+1枚役(13番チェリー)': '🍒',
+      '単独チェリー1+1枚役+BIG': '🍒',
+      '単独チェリー1+1枚役+BIG(1番チェリー)': '🍒',
+      '単独チェリー1+1枚役+BIG(13番チェリー)': '🍒',
+      '中段チェリー+1枚役': '🍒',
+      '中段チェリー+1枚役+BIG': '🍒',
+      'チェリー同時成立(表内合成)': '🍒',
+      '単独1枚役': '💴',
       リプレイ: '🔄',
+      ピエロ: '🤡',
       ビエロ: '🔔',
       ベル: '🔔',
       ビッグボーナス: '💰',

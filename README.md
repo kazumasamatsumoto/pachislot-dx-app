@@ -1,59 +1,28 @@
-# PachislotDxApp
+ジャグラーガールズ
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
 
-## Development server
+設定1：BIG 1/287.44、REG 1/397.19、合算 1/166.76
+設定2：BIG 1/282.48、REG 1/364.09、合算 1/159.07
+設定3：BIG 1/273.07、REG 1/334.37、合算 1/150.31
+設定4：BIG 1/264.26、REG 1/297.89、合算 1/140.03
+設定5：BIG 1/258.02、REG 1/286.18、合算 1/135.69
+設定6：BIG 1/240.94、REG 1/270.81、合算 1/127.50
 
-To start a local development server, run:
 
-```bash
-ng serve
-```
+設定1：単独BIG 1/409.60、単独REG 1/546.13、チェリー+BIG 1/1963.76、チェリー+REG 1/1456.36
+設定2：単独BIG 1/399.61、単独REG 1/504.12、チェリー+BIG 1/1963.76、チェリー+REG 1/1310.72
+設定3：単独BIG 1/390.10、単独REG 1/464.79、チェリー+BIG 1/1910.22、チェリー+REG 1/1191.56
+設定4：単独BIG 1/372.36、単独REG 1/422.81、チェリー+BIG 1/1910.22、チェリー+REG 1/1008.25
+設定5：単独BIG 1/360.09、単独REG 1/407.06、チェリー+BIG 1/1910.22、チェリー+REG 1/963.76
+設定6：単独BIG 1/334.37、単独REG 1/385.51、チェリー+BIG 1/862.32、チェリー+REG 1/910.22
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+設定1：ブドウ 1/6.33、チェリー 1/33.56、ピエロ 1/1092.27、ベル 1/1092.27
+設定2：ブドウ 1/6.33、チェリー 1/33.47、ピエロ 1/1092.27、ベル 1/1092.27
+設定3：ブドウ 1/6.33、チェリー 1/33.32、ピエロ 1/1092.27、ベル 1/1092.27
+設定4：ブドウ 1/6.33、チェリー 1/33.15、ピエロ 1/1092.27、ベル 1/1092.27
+設定5：ブドウ 1/6.21、チェリー 1/33.10、ピエロ 1/1092.27、ベル 1/1092.27
+設定6：ブドウ 1/6.15、チェリー 1/32.97、ピエロ 1/1092.27、ベル 1/1092.27
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+出展はすろぱちくえすとさんです。
+https://www.slopachi-quest.com/article/juggler-girls/

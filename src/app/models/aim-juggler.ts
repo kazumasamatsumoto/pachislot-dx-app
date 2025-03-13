@@ -3,12 +3,19 @@ import {
   SlotSymbolProbabilities,
 } from './slot-probability.interface';
 
+/**
+ * アイムジャグラーの子役確率データ
+ * 出典: すろぱちくえすと
+ * @see https://www.slopachi-quest.com/article/im-juggler-ex-6gouki/
+ */
 export class AimJuggler implements SlotMachineData {
   machineName: string;
   symbols: SlotSymbolProbabilities[];
+  dataSource: string;
 
   constructor() {
     this.machineName = 'アイムジャグラー';
+    this.dataSource = 'すろぱちくえすと (https://www.slopachi-quest.com/article/im-juggler-ex-6gouki/)';
     this.symbols = [
       {
         symbolName: 'ブドウ',
@@ -19,50 +26,6 @@ export class AimJuggler implements SlotMachineData {
           { setting: 4, probability: 1 / 6.02 },
           { setting: 5, probability: 1 / 6.02 },
           { setting: 6, probability: 1 / 5.78 },
-        ],
-      },
-      {
-        symbolName: 'チェリー',
-        probabilities: [
-          { setting: 1, probability: 1 / 35.62 },
-          { setting: 2, probability: 1 / 35.62 },
-          { setting: 3, probability: 1 / 35.62 },
-          { setting: 4, probability: 1 / 35.62 },
-          { setting: 5, probability: 1 / 35.62 },
-          { setting: 6, probability: 1 / 35.62 },
-        ],
-      },
-      {
-        symbolName: 'レアチェリー',
-        probabilities: [
-          { setting: 1, probability: 1 / 6553.6 },
-          { setting: 2, probability: 1 / 6553.6 },
-          { setting: 3, probability: 1 / 6553.6 },
-          { setting: 4, probability: 1 / 5461.33 },
-          { setting: 5, probability: 1 / 5461.33 },
-          { setting: 6, probability: 1 / 5461.33 },
-        ],
-      },
-      {
-        symbolName: 'チェリー重複BIG',
-        probabilities: [
-          { setting: 1, probability: 1 / 1129.93 },
-          { setting: 2, probability: 1 / 1129.93 },
-          { setting: 3, probability: 1 / 1129.93 },
-          { setting: 4, probability: 1 / 1092.27 },
-          { setting: 5, probability: 1 / 1092.27 },
-          { setting: 6, probability: 1 / 1092.27 },
-        ],
-      },
-      {
-        symbolName: 'チェリー重複REG',
-        probabilities: [
-          { setting: 1, probability: 1 / 1456.36 },
-          { setting: 2, probability: 1 / 1310.72 },
-          { setting: 3, probability: 1 / 1092.27 },
-          { setting: 4, probability: 1 / 1057.03 },
-          { setting: 5, probability: 1 / 851.12 },
-          { setting: 6, probability: 1 / 851.12 },
         ],
       },
       {
